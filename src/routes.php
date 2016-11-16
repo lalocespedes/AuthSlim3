@@ -1,24 +1,26 @@
 <?php
 // Routes
 
-$app->get('/[{name}]', function ($request, $response, $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
+$app->get('/', ['lalocespedes\Controllers\HomeController', 'index']);
 
-    // $this->db->table('users')->insert([
-    //     'name' => 'lalocespedes',
-    //     'email' => 'lalocespedes@gmail.com',
-    //     'password' => '123'
-    //     ]);
+// $app->get('/[{name}]', function ($request, $response, $args) {
+//     // Sample log message
+//     $this->logger->info("Slim-Skeleton '/' route");
 
-    // $this->db->table('users')->where('id', 2)->delete();
+//     // $this->db->table('users')->insert([
+//     //     'name' => 'lalocespedes',
+//     //     'email' => 'lalocespedes@gmail.com',
+//     //     'password' => '123'
+//     //     ]);
 
-    $users = $this->db->table('users')->get();
+//     // $this->db->table('users')->where('id', 2)->delete();
 
-    dump($users);
+//     $users = $this->db->table('users')->get();
 
-    exit;
+//     dump($users);
 
-    // Render index view
-    return $this->renderer->render($response, 'index.phtml', $args);
-});
+//     exit;
+
+//     // Render index view
+//     return $this->renderer->render($response, 'index.phtml', $args);
+// });

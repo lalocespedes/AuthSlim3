@@ -9,6 +9,9 @@ if (PHP_SAPI == 'cli-server') {
     }
 }
 
+use lalocespedes\App;
+use Illuminate\Database\Capsule\Manager as Capsule;
+
 require __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = new Dotenv\Dotenv(dirname(__DIR__));
@@ -24,11 +27,23 @@ $dotenv->required([
 session_start();
 
 // Instantiate the app
-$settings = require __DIR__ . '/../src/settings.php';
-$app = new \Slim\App($settings);
+//$settings = require __DIR__ . '/../src/settings.php';
+//$app = new \Slim\App($settings);
+
+$app = new App;
+
+$capsule = new Capsule;
+$capsule->addConnection([
+    'driver' => getenv('DB_CONNECTION'),
+    'database' => getenv('DB_DATABASE'),
+    'prefix' => ''
+]);
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 
 // Set up dependencies
-require __DIR__ . '/../src/dependencies.php';
+//require __DIR__ . '/../src/dependencies.php';
 
 // Register middleware
 require __DIR__ . '/../src/middleware.php';
